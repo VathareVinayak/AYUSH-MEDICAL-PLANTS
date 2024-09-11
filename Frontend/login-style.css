@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --white: rgba(255, 255, 255, 1); /* Opaque white */
+    --black: rgba(0, 0, 0, 1); /* Opaque black */
+    --lightBlue: #17a;
+}
+
+/* Resetting margins, paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body with transparent background */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent body */
+}
+
+/* Wrapper for forms with black border and shadow */
+.wrapper {
+    position: relative;
+    width: 750px;
+    height: 450px;
+    background: none; /* No background */
+    border: 2px solid black; /* Added black border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Added shadow */
+    overflow: hidden;
+}
+
+/* Full-screen video background styling */
+#backgroundVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;      /* Ensure it's behind other content */
+    object-fit: cover; /* Ensures video covers the entire background */
+    filter: brightness(50%); /* Makes the video slightly darker */
+}
+
+/* Form box container */
+.wrapper .form-box {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: none; /* Ensure form boxes are fully transparent */
+    border-radius: 0;
+}
+
+/* Login form box */
+.wrapper .form-box.login {
+    left: 0;
+    padding: 0 60px 0 40px;
+}
+
+/* Register form box */
+.wrapper .form-box.register {
+    padding: 0 40px 0 60px;
+    right: 0;
+}
+
+/* Title styling */
+.form-box h2 {
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 32px;
+    color: var(--white); /* White color text */
+    text-align: center;
+}
+
+.form-box h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: var(--lightBlue); /* Light blue underline */
+}
+
+/* Input box styling */
+.form-box .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 25px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    color: var(--white); /* White text input */
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--white); /* White border for input */
+    transition: .5s;
+    padding-right: 23px;
+}
+
+.input-box input:focus,
+.input-box input:valid {
+    border-bottom-color: var(--lightBlue); /* Light blue on focus */
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--white); /* White label text */
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+    color: var(--lightBlue);
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--white); /* White icon */
+    transition: 0.5s;
+}
+
+.input-box input:focus~i,
+.input-box input:valid~i {
+    color: var(--lightBlue);
+}
+
+/* Button styling */
+form button {
+    width: 100%;
+    height: 45px;
+    background-color: var(--lightBlue);
+    color: var(--white);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+form button:hover {
+    box-shadow: 0 0 10px rgba(23, 170, 170, 0.8); /* Hover glow effect */
+}
+
+/* Link text styling */
+form .linkTxt {
+    font-size: 14px;
+    color: var(--white); /* White text */
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+.linkTxt p a {
+    color: var(--lightBlue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Animations for login form */
+.wrapper .form-box.login .animation {
+    transform: translateX(0);
+    transition: 0.7s ease;
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s * var(--j));
+}
+
+/* Animation when switching to Sign Up */
+.wrapper.active .form-box.login .animation {
+    transform: translateX(-120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s * var(--i));
+}
+
+/* Register form animations */
+.wrapper .form-box.register .animation {
+    transform: translateX(120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition: .7s ease;
+    transition-delay: calc(.1s * var(--j));
+}
+
+.wrapper.active .form-box.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s * var(--i));
+}
+
+/* Info text container */
+.wrapper .info-text {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: none; /* Fully transparent info text */
+    border-radius: 0;
+}
+
+/* Login info text */
+.wrapper .info-text.login {
+    right: 0;
+    text-align: right;
+    padding: 0 40px 60px 150px;
+}
+
+/* Register info text */
+.wrapper .info-text.register {
+    left: 0;
+    text-align: left;
+    padding: 0 150px 60px 40px;
+    pointer-events: none;
+}
+
+/* Info text content */
+.wrapper .info-text h2 {
+    font-size: 36px;
+    color: var(--white); /* White text */
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+.wrapper .info-text p {
+    font-size: 16px;
+    color: var(--white); /* White text */
+}
+
+/* Animations for info text */
+.wrapper .info-text.login .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition: 0.7s ease;
+    transition-delay: calc(.1s * var(--j));
+}
+
+.wrapper.active .info-text.login .animation {
+    transform: translateX(120px);
+    opacity: 0;
+    filter: blur(10px);
+    transition-delay: calc(.1s * var(--i));
+}
+
+.wrapper .info-text.register .animation {
+    transform: translateX(-120%);
+    opacity: 0;
+    filter: blur(10px);
+    transition: .7s ease;
+    transition-delay: calc(.1s * var(--j));
+}
+
+.wrapper.active .info-text.register .animation {
+    transform: translateX(0);
+    opacity: 1;
+    filter: blur(0);
+    transition-delay: calc(.1s * var(--i));
+}
